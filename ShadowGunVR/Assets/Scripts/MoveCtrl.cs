@@ -19,6 +19,9 @@ public class MoveCtrl : MonoBehaviour {
     public float damping = 3.0f;
 
     private Transform tr;
+    private Transform camTr;
+    private CharacterController cc;
+
     // 웨이포인트를 저장할 배열
     private Transform[] points;
     // 다음에 이동해야 할 위치 인덱스 변수
@@ -27,6 +30,9 @@ public class MoveCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         tr = GetComponent<Transform>();
+        camTr = Camera.main.GetComponent<Transform>();
+        cc = GetComponent<CharacterController>();
+
         // WayPointGroup 게임오브젝트 아래에 있는 모든 Point의 Transform 컴포넌트를 추출
         points = GameObject.Find("WayPointGroup").GetComponentsInChildren<Transform>();
 	}
@@ -38,6 +44,7 @@ public class MoveCtrl : MonoBehaviour {
                 MoveWayPoint();
                 break;
             case MoveType.LOOK_AT:
+                MoveLookAt();
                 break;
             case MoveType.DAYDREAM:
                 break;
@@ -54,6 +61,13 @@ public class MoveCtrl : MonoBehaviour {
 
         // 전진 방향으로 이동 처리
         tr.Translate(Vector3.forward * Time.deltaTime * speed);
+    }
+
+    void MoveLookAt() {
+        // 메인카메라가 바라보는 방향
+        Vector3 dir = camTr.TransformDirection(Vector3.forward);
+        // dir 벡터의 방향으로 초당 speed 만큼 이동
+        cc.SimpleMove(dir * speed);
     }
 
     private void OnTriggerEnter(Collider other)

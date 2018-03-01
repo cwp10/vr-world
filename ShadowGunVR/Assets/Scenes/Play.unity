@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7689e21c12631fd46b491d0a2e9566d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveType: 0
+  moveType: 1
   speed: 1
   damping: 3
 --- !u!1 &1049546035
