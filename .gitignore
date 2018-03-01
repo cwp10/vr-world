@@ -9,6 +9,7 @@
 *.sln
 *.user
 *.userprefs
+*.vs
 
 /*.tmproj
 /*.sublime-project
