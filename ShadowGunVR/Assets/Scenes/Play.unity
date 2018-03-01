@@ -512,6 +512,7 @@ GameObject:
   - component: {fileID: 479133792}
   - component: {fileID: 479133791}
   - component: {fileID: 479133790}
+  - component: {fileID: 479133794}
   m_Layer: 9
   m_Name: Menu-Ammo
   m_TagString: Untagged
@@ -624,6 +625,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 479133788}
+--- !u!114 &479133794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 479133788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08bc1ae4286fe04f9f09ac3c51f8ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &563788134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,6 +1325,7 @@ GameObject:
   - component: {fileID: 1621640801}
   - component: {fileID: 1621640800}
   - component: {fileID: 1621640799}
+  - component: {fileID: 1621640803}
   m_Layer: 9
   m_Name: Menu-Grenade
   m_TagString: Untagged
@@ -1425,6 +1438,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1621640797}
+--- !u!114 &1621640803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1621640797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08bc1ae4286fe04f9f09ac3c51f8ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1626819071
 GameObject:
   m_ObjectHideFlags: 0
