@@ -6,13 +6,15 @@ public class EyeCast : MonoBehaviour {
     private Transform tr;
     private Ray ray;
     private RaycastHit hit;
+    private CrossHairByAnim CoressHair;
 
     public float dist = 10.0f;
 
 	// Use this for initialization
 	void Start () {
-        tr = GetComponent<Transform>();	
-	}
+        tr = GetComponent<Transform>();
+        CoressHair = GameObject.Find("CrossHair").GetComponent<CrossHairByAnim>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
