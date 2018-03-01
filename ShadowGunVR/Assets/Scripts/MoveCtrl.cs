@@ -27,6 +27,8 @@ public class MoveCtrl : MonoBehaviour {
     // 다음에 이동해야 할 위치 인덱스 변수
     private int nextIdx = 1;
 
+    public static bool isStopped = false;
+
 	// Use this for initialization
 	void Start () {
         tr = GetComponent<Transform>();
@@ -39,6 +41,8 @@ public class MoveCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (isStopped) return;
+
         switch (moveType) {
             case MoveType.WAY_POINT:
                 MoveWayPoint();
