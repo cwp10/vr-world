@@ -32,6 +32,11 @@ public class WeaponCtrl : MonoBehaviour {
     // 조준점의 색상을 변경할 동안 비활성화할 Animator 컴포넌트를 연결할 변수
     private Animator crossHairAnim;
 
+    // Weapon에 추가된 Animator 컴포넌트
+    private Animator weaponAnim;
+    // 총의 처음 위치를 저장하기 위한 변수
+    private Vector3 originPosition;
+
 	// Use this for initialization
 	void Start () {
         _audio = GetComponent<AudioSource>();
@@ -44,6 +49,11 @@ public class WeaponCtrl : MonoBehaviour {
         originColor = crossHair.color;
 
         muzzleFlash.enabled = false;
+
+        // Animator 컴포넌트 추출
+        weaponAnim = GetComponent<Animator>();
+        // 총의 처음 위치를 저장
+        originPosition = this.transform.localPosition;
 	}
 	
 	// Update is called once per frame
@@ -81,11 +91,23 @@ public class WeaponCtrl : MonoBehaviour {
 
     // 총구화염효과
     IEnumerator FireEffect() {
+        // 총의 롤링 에니메이션을 정지
+        weaponAnim.enabled = false;
+        // x, y 값의 난수 발생
+        Vector2 _random = Random.insideUnitCircle;
+        // 총을 앞뒤와 상하로 이동시킴
+        this.transform.localPosition += new Vector3(0, _random.x * 0.01f, _random.y * 0.01f);
+
         muzzleFlash.transform.Rotate(Vector3.forward, Random.Range(0.0f, 360.0f));
         muzzleFlash.enabled = true;
         _audio.PlayOneShot(fireSfx);
 
         yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
         muzzleFlash.enabled = false;
+
+        // 총의 원래위치로 환원
+        this.transform.localPosition = originPosition;
+        // 총의 롤링 애니메이션을 재가동
+        weaponAnim.enabled = true;
     }
 }
