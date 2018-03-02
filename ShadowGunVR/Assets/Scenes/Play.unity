@@ -1719,6 +1719,24 @@ MonoBehaviour:
   bulletTrail: {fileID: 1772493440}
   fireRate: 0.08
   isFire: 0
+  fireColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!95 &1332203747
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332203743}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c48ed03a2bdd4b42859c28c065324ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1354026190
 GameObject:
   m_ObjectHideFlags: 0

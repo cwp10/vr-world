@@ -28,6 +28,8 @@ public class MoveCtrl : MonoBehaviour {
     private int nextIdx = 1;
 
     public static bool isStopped = false;
+    // 총에 추가된 Animator 컴포넌트 변수
+    private Animator weaponAnim;
 
 	// Use this for initialization
 	void Start () {
@@ -35,12 +37,18 @@ public class MoveCtrl : MonoBehaviour {
         camTr = Camera.main.GetComponent<Transform>();
         cc = GetComponent<CharacterController>();
 
+        // 총에 추가된 Animator 컴포넌트 추출
+        weaponAnim = GameObject.Find("WeaponRifle").GetComponent<Animator>();
+
         // WayPointGroup 게임오브젝트 아래에 있는 모든 Point의 Transform 컴포넌트를 추출
         points = GameObject.Find("WayPointGroup").GetComponentsInChildren<Transform>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        // 총에 추가된 animator 컴포넌트의 활성화/비활성화
+        weaponAnim.enabled = !isStopped;
+
         if (isStopped) return;
 
         switch (moveType) {
