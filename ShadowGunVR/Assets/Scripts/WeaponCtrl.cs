@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponCtrl : MonoBehaviour {
 
@@ -22,10 +23,26 @@ public class WeaponCtrl : MonoBehaviour {
     private RaycastHit hit;
     private Transform camTr;
 
+    // 레티클 초기 색상
+    private Color originColor;
+    // 조준했을 때의 레티클 색상
+    public Color fireColor = Color.red;
+    // 조준점 이미지를 연결할 변수
+    private Image crossHair;
+    // 조준점의 색상을 변경할 동안 비활성화할 Animator 컴포넌트를 연결할 변수
+    private Animator crossHairAnim;
+
 	// Use this for initialization
 	void Start () {
         _audio = GetComponent<AudioSource>();
         camTr = Camera.main.GetComponent<Transform>();
+        // CrossHair 추출후 변수에 저장
+        crossHair = GameObject.Find("CrossHair").GetComponent<Image>();
+        // CrossHair 게임오브젝트에 포함된 Animator 컴포넌트를 추출한 다음 변수에 저장
+        crossHairAnim = crossHair.GetComponent<Animator>();
+        // 레티클의 초기 색상을 저장
+        originColor = crossHair.color;
+
         muzzleFlash.enabled = false;
 	}
 	
@@ -34,8 +51,16 @@ public class WeaponCtrl : MonoBehaviour {
         // 레이케스트가 적 캐릭터를 관통 했는지 여부 확인
         if (Physics.Raycast(camTr.position, camTr.forward, out hit, 100.0f, 1 << LayerMask.NameToLayer("ENEMY"))) {
             isFire = true;
+            // 색상을 변경하기 전에 Animator 컴포넌트 비활성화
+            crossHairAnim.enabled = false;
+            // 레티클의 색상 변경
+            crossHair.color = fireColor;
         } else {
             isFire = false;
+            // Animator 컴포넌트 활성화
+            crossHairAnim.enabled = true;
+            // 레티클의 최초 색상으로 환원
+            crossHair.color = originColor;
         }
 
         if (isFire) {
