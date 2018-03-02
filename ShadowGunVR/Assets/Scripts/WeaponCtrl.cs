@@ -19,18 +19,30 @@ public class WeaponCtrl : MonoBehaviour {
     // 발사여부를 판별할 변수
     public bool isFire = false;
 
+    private RaycastHit hit;
+    private Transform camTr;
+
 	// Use this for initialization
 	void Start () {
         _audio = GetComponent<AudioSource>();
+        camTr = Camera.main.GetComponent<Transform>();
         muzzleFlash.enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        // 레이케스트가 적 캐릭터를 관통 했는지 여부 확인
+        if (Physics.Raycast(camTr.position, camTr.forward, out hit, 100.0f, 1 << LayerMask.NameToLayer("ENEMY"))) {
+            isFire = true;
+        } else {
+            isFire = false;
+        }
+
         if (isFire) {
             if (Time.time >= nextFire) {
                 nextFire = Time.time + fireRate;
-
+                // 적 케릭터에 Hit 함수를 호출
+                hit.collider.SendMessage("Hit", SendMessageOptions.DontRequireReceiver);
                 // 총구 화염 효과
                 StartCoroutine(FireEffect());
             }
